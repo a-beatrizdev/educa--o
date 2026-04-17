@@ -73,4 +73,26 @@ def cadastrar_aula():
             session.rollback()
             print(f"Ocorreu um erro {erro}")
 
-cadastrar_aula()
+# cadastrar_aula()
+
+def listar_aulas():
+    with Session() as session:
+        try:
+            todos = session.query(Professor).all()
+            for p in todos:
+                print(p.aulas)
+                print(f"\n--- Aula {aulas.nome} ---")
+                for i in p.aulas:
+                    print(i)
+        except Exception as erro:
+            session.rollback()
+            print(f"Ocorreu um erro {erro}")
+
+# listar_aulas()
+
+
+
+
+
+
+
