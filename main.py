@@ -56,7 +56,7 @@ def cadastrar_aula():
     with Session() as session:
         try:
             nome_professor = input("Digite o nome do professor: ").capitalize()
-            professor = session.query(Aula).filter_by(nome=nome_professor).first()
+            professor = session.query(Professor).filter_by(nome=nome_professor).first()
             if professor == None:
                 print(f"Nenhum professor encontrado com esse nome {nome_professor}!")
                 return
@@ -64,10 +64,10 @@ def cadastrar_aula():
                 nome = input("Digite o nome da aula: ").capitalize()
                 duracao = input("Digite o tempo de duração da aula: ").capitalize()
                 alunos_presentes = input("Digite a quantidade de alunos presentes: ").capitalize()
-                aulas = Aula(nome=nome, duracao=duracao, alunos_presentes=alunos_presentes, professores=professores)
-                aula.professores.append(professor)
-            session.add(aulas)
-            session.commit()
+                aulas = Aula(nome=nome, duracao=duracao, alunos_presentes=alunos_presentes, professores=professor)
+                # aula.professores.append(professor)
+                session.add(aulas)
+                session.commit()
             print(f"Aula cadastrada com sucesso!")
         except Exception as erro:
             session.rollback()
